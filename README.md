@@ -15,3 +15,15 @@ Currently, this OS does not have file system support but I aim to either impleme
 To assemble using NASM, run:
 
   *nasm main.asm -f bin boot.bin*
+
+**COMMANDS LIST**
+
+*INSTALL* - installs the operating system onto the primary hard disk (disk 80)
+
+*CLS* - clears the screen
+
+*ECHO disk* - prints the number of the current disk (A: = 00, C: = 80)
+
+*CD [disk letter]:* - changes the current working disk
+
+*VER* - prints the current OS version string
