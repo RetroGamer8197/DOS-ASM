@@ -8,7 +8,7 @@ mov [si], dx
 
 jmp start
 
-VersionName db 13, 10, "Totally MS-DOS 6.22", 0
+VersionName db 13, 10, "DOS-ASM v0.1", 0
 
 %include "bootloader.asm"
 
