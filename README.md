@@ -14,4 +14,4 @@ Currently, this OS does not have file system support but I aim to either impleme
 
 To assemble using NASM, run:
 
-|nasm main.asm -f bin boot.bin
+  *nasm main.asm -f bin boot.bin*
