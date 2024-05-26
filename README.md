@@ -1,4 +1,4 @@
-**DOS-ASM**
+# DOS-ASM
 
 DOS-ASM is my self-created operating system made entirely in 8086 Assembly. Each of the files in the functions subdirectory contains subroutines that act as the drivers for this OS.
 
