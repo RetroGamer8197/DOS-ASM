@@ -29,10 +29,8 @@ checkFile:
     je endFile
     mov cl, [di]
     mov ch, [si]
-    cmp ch, 0x00
-    je endFile
-    cmp cl, 0x00
-    je nextFile
+    cmp ch, cl
+    jne endFile
     inc si
     inc di
     jmp checkFile
@@ -63,13 +61,53 @@ fileNotFound:
 found:
     ret
 
-readKernel:
-    mov si, kernelName
-    cld
-    call printText
+listDiskContents:
+    mov ax, 0x0E0D
+    int 0x10
+    mov ax, 0x0E0A
+    int 0x10
     mov si, 0x4200
-    cld
-    call printText
+    call printFiles
+    ret
+    
+printFiles:
+    cmp si, 0x4A00
+    je found
+    call printCurrentFile
+    mov bx, si
+    call newPrintLine
+    and bl,0xF0
+    add bx, 0x0010
+    mov si, bx
+    
+    jmp printFiles
+    
+newPrintLine:
+    mov ax, si
+    and al, 0xF0
+    mov si, ax
+    cmp byte [si], 0x00
+    je return
+    mov ax, 0x0E0D
+    int 0x10
+    mov ax, 0x0E0A
+    int 0x10
+    ret
+
+printCurrentFile:
+    cmp byte [si], 0x00
+    je found
+    lodsb
+    mov ah, 0x0E
+    int 0x10
+    inc dx
+    mov dx, si
+    and dl, 0x0F
+    cmp dl, 0x0B
+    je endFile
+    jmp printCurrentFile
+
+readKernel:
     mov si, 0x4200
     mov di, kernelName
     call searchForFile

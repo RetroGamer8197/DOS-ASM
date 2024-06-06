@@ -30,6 +30,13 @@ enterPressed:
     cmp al, 0x00
     je cd_A
 
+    ;dir
+    mov si, 0x4000
+    mov di, dirCmd
+    call cmpStr
+    cmp al, 0x00
+    je dir
+
     ;printDisk:
     mov si, 0x4000
     mov di, printdlCmd
@@ -84,14 +91,32 @@ clear:
     mov si, 0x4000
     ret
 
+dir:
+    call listDiskContents
+    call nextDOSLine
+    ret
+
 install:
-    mov ax, 0x0304
-    mov bh, 0x00
+    mov ax, 0x0301
     mov dx, 0x0080
     mov bx, 0x7C00
     mov cx, 0x0000
     mov es, cx
     mov cx, 0x0001
+    int 0x13
+    mov ax, 0x0305
+    mov dx, 0x0080
+    mov bx, 0x4200
+    mov cx, 0x0000
+    mov es, cx
+    mov cx, 0x0002
+    int 0x13
+    mov ax, 0x0308
+    mov dx, 0x0080
+    mov bx, 0x7E00
+    mov cx, 0x0000
+    mov es, cx
+    mov cx, 0x0006
     int 0x13
     mov si, installText
     cld
@@ -129,5 +154,6 @@ installCmd db "install", 0x0D
 cd_ACmd db "cd a:", 0x0D
 cd_CCmd db "cd c:", 0x0D
 clsCmd db "cls", 0x0D
+dirCmd db "dir", 0x0D
 printdlCmd db "echo disk", 0x0D
 verCmd db "ver", 0x0D
