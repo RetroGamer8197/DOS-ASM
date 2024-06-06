@@ -6,6 +6,7 @@ cmpStr:
     add ch, 0x20
     cmp ch, cl
     jne failCmp
+    
 cmpContinue:
     cmp byte [di], 0x0D
     je endCmp

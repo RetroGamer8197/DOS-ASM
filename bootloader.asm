@@ -1,41 +1,38 @@
-%include "functions/initialtext.asm"
+[ORG 0x7C00]
+xor ax, ax
+mov ds, ax
+cld
+
+mov si, 0x3FFE
+mov [si], dx
+
+jmp start
+
 %include "functions/disk.asm"
-%include "functions/bootkeyboard.asm"
+
+printText:
+    lodsb
+    or al, al
+    jz return
+    mov ah, 0x0E
+    mov bh, 0x00
+    int 0x10
+    jmp printText
 
 start:
-    call initDisplay
+    mov ax, 0x0002
+    int 0x10
 
     mov si, bootMsg
     cld
     call printText
 
-    mov al, 0x04
-    mov cx, 0x0002
-    mov bx, 0x7E00
-    call readSector
+    call loadFS
 
-    call nextSector
-
-    mov bl, 0x1C
-    call loopCheckKey
-
-    mov si, enterMsg
-    cld
-    call printText
-
-    mov bl, 0x1C
-    call loopCheckKey
-
-    call initDisplay
-
-    mov si, clearMsg
-    cld
-    call printText
-
-    call printDisk
+    call readKernel
 
     mov si, 0x4000
-    jmp type
+    jmp 0x7E00
 
 return:
     ret
@@ -43,7 +40,7 @@ return:
 hang:
     jmp hang
 
-%include "data/bootdata.inc"
+bootMsg db "Loading from disk ...", 13, 10, 0
 
 times 510 - ($-$$) db 0
 db 0x55
