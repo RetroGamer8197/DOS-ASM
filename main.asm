@@ -15,7 +15,7 @@ hang:
 return:
     ret
 
-VersionName db 13, 10, "DOS-ASM v0.2", 0
+VersionName db 13, 10, "DOS-ASM v0.21", 0
 
 %include "functions/cmd.asm"
 %include "functions/disk.asm"
