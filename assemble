@@ -1,0 +1,3 @@
+nasm bootloader.asm -f bin -o build/bootloader.bin
+nasm main.asm -f bin -o build/kernel.bin
+nasm build.asm -f bin -o build/boot.bin
