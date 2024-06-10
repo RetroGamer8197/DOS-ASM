@@ -14,7 +14,7 @@ Currently, this OS does not have file system support but I aim to either impleme
 
 To assemble using NASM, run:
 
-  *nasm main.asm -f bin boot.bin*
+  <./assemble>
 
 **COMMANDS LIST**
 
@@ -27,3 +27,5 @@ To assemble using NASM, run:
 *CD [disk letter]:* - changes the current working disk
 
 *VER* - prints the current OS version string
+
+*DIR* - lists all the files in the current directory
