@@ -8,7 +8,7 @@ mov [si], dx
 
 jmp start
 
-%include "functions/disk.asm"
+%include "functions/sysdisk.asm"
 
 printText:
     lodsb
@@ -27,7 +27,7 @@ start:
     cld
     call printText
 
-    call loadFS
+    call loadSysFS
 
     call readKernel
 

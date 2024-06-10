@@ -2,6 +2,8 @@
 
 call initDisplay
 
+call loadFS
+
 mov si, VersionName + 2
 cld
 call printText

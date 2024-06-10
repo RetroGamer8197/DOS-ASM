@@ -107,17 +107,6 @@ printCurrentFile:
     je endFile
     jmp printCurrentFile
 
-readKernel:
-    mov si, 0x4200
-    mov di, kernelName
-    call searchForFile
-    mov bx, 0x7E00
-    cmp ax, 0xFFFF
-    jne loadFile
-    mov si, kernelNotFound
-    call printText
-    jmp hang
-
 loadFile:               ;FILE = 12B NAME, 1B START SECTOR, 1B CYLINDER, 1B FILE SIZE (SECTORS)
     add ax, 0x0C
     mov si, ax
