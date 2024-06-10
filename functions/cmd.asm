@@ -75,6 +75,7 @@ cd_C:
     mov si, 0x3FFE
     mov dx, 0x0080
     mov [si], dx
+    call loadFS
     call nextDOSLine
     ret
 
@@ -82,6 +83,7 @@ cd_A:
     mov si, 0x3FFE
     mov dx, 0x0000
     mov [si], dx
+    call loadFS
     call nextDOSLine
     ret
 
