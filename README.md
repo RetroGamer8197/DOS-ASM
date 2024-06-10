@@ -29,3 +29,15 @@ To assemble using NASM, run:
 *VER* - prints the current OS version string
 
 *DIR* - lists all the files in the current directory
+
+
+**MEMORY MAP:**
+`0x0000-0x3FFD` - Unused (as of v0.2.2)
+`0x3FFE-0x3FFF` - Stores the boot disk information
+`0x4000-0x41FF` - Stores the currently typed command(s)
+`0x4200-0x4A00` - Stores the file system information of the current working disk
+`0x4A00-0x7BFF` - Unused (as of v0.2.2)
+`0x7C00-0x7DFF` - Stores the bootloader
+`0x7E00-0x87FF` - Stores the kernel
+`0x8800-0xF1FF` - Unused (as of v0.2.2)
+`0xF200-0xFA00` - Stores the boot disk file system information
