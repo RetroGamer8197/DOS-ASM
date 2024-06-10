@@ -32,6 +32,7 @@ To assemble using NASM, run:
 
 
 **MEMORY MAP:**
+
 `0x0000-0x3FFD` - Unused (as of v0.2.2)
 
 `0x3FFE-0x3FFF` - Stores the boot disk information
