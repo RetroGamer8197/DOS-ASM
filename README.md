@@ -10,8 +10,6 @@ The OS is designed in 16 bit real mode and uses BIOS interrupts for most of its 
 * A system based around a Core2Duo E7200
 * A Lenovo Thinkpad T430
 
-Currently, this OS does not have file system support but I aim to either implement FAT32 and/or my own file system in the future. Using a diskette image, the OS has the ability to install itself to a HDD using the BIOS Interrupt 0x13
-
 To assemble using NASM, run:
 
   `./assemble`
@@ -29,6 +27,20 @@ To assemble using NASM, run:
 *VER* - prints the current OS version string
 
 *DIR* - lists all the files in the current directory
+
+**FILE SYSTEM**
+
+As of v0.2.1, the OS has support for a custom file system which uses the first 2.5 KB after the boot sector to store the information about each file. Each file uses 16 bytes to define itself:
+
+`0x0-0xB` - File name (max 12 characters)
+
+`0xC` - Start sector
+
+`0xD` - Cylinder
+
+`0xE` - File size (sectors)
+
+`0xF` - Currently unused but may be used in the future to define a parent directory
 
 
 **MEMORY MAP:**
