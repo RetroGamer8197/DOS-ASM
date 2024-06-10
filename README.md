@@ -57,8 +57,8 @@ As of v0.2.1, the OS has support for a custom file system which uses the first 2
 
 `0x7C00-0x7DFF` - Stores the bootloader
 
-`0x7E00-0x87FF` - Stores the kernel
+`0x7E00-0x8DFF` - Stores the kernel
 
-`0x8800-0xF1FF` - Unused (as of v0.2.2)
+`0x8E00-0xF1FF` - Unused (as of v0.2.2)
 
 `0xF200-0xFA00` - Stores the boot disk file system information
