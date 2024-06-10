@@ -118,8 +118,8 @@ loadFile:               ;FILE = 12B NAME, 1B START SECTOR, 1B CYLINDER, 1B FILE 
     call readSector
     ret
 
-kernelName db "KERNEL.BIN", 0, 0
-kernelNotFound db "Kernel not found", 0
+%include "functions/sysdisk.asm"
+
 errorMsg db "Disk Access Failed", 0
 
 diskA db "A:\> ", 0

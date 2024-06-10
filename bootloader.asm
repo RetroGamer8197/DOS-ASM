@@ -29,7 +29,8 @@ start:
 
     call loadSysFS
 
-    call readKernel
+    mov di, kernelName
+    call readSysFile
 
     mov si, 0x4000
     jmp 0x7E00
@@ -39,6 +40,20 @@ return:
 
 hang:
     jmp hang
+
+readSector:
+    mov si, 0x3FFE
+    mov dx, [si]
+    mov si, 0x0000
+    mov es, si
+    mov ah, 0x02
+    int 0x13
+    cmp ah, 0x00
+    jne printSysError
+    ret
+
+found:
+    ret
 
 bootMsg db "Loading from disk ...", 13, 10, 0
 
