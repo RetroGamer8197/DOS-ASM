@@ -62,50 +62,34 @@ found:
     ret
 
 listDiskContents:
-    mov ax, 0x0E0D
-    int 0x10
-    mov ax, 0x0E0A
-    int 0x10
-    mov si, 0x4200
+    call newLine
+    mov si, 0x41F0
     call printFiles
     ret
-    
+
 printFiles:
-    cmp si, 0x4A00
-    je found
-    call printCurrentFile
-    mov bx, si
-    call newPrintLine
-    and bl,0xF0
-    add bx, 0x0010
-    mov si, bx
-    
-    jmp printFiles
-    
-newPrintLine:
-    mov ax, si
-    and al, 0xF0
-    mov si, ax
-    cmp byte [si], 0x00
+    mov dx, si
+    and dl, 0xF0
+    add dx, 0x10
+    mov si, dx
+    cmp dh, 0x4A
     je return
-    mov ax, 0x0E0D
-    int 0x10
-    mov ax, 0x0E0A
-    int 0x10
-    ret
+    cmp byte [si], 0x00
+    je printFiles
+    call printCurrentFile
+    call newLine
+    jmp printFiles
 
 printCurrentFile:
-    cmp byte [si], 0x00
-    je found
-    lodsb
-    mov ah, 0x0E
-    int 0x10
-    inc dx
+    mov al, [si]
+    cmp al, 0x00
+    call printChar
     mov dx, si
+    inc si
     and dl, 0x0F
     cmp dl, 0x0B
-    je endFile
-    jmp printCurrentFile
+    jne printCurrentFile
+    ret
 
 loadFile:               ;FILE = 12B NAME, 1B START SECTOR, 1B CYLINDER, 1B FILE SIZE (SECTORS)
     add ax, 0x0C
