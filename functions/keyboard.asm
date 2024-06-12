@@ -1,6 +1,7 @@
 type:
     call readKey
     call handleKeys
+    call moveCursor
     jmp type
 
 handleKeys:
@@ -13,8 +14,7 @@ handleKeys:
     je enterPressed
     cmp ah, 0x52
     je install
-    mov ah, 0x0E
-    int 0x10
+    call printChar
     inc si
     ret
 
@@ -22,17 +22,11 @@ backspace:
     mov ax, si
     cmp ax, 0x4000
     je return
-    mov ax, 0x0E08
-    mov bh, 0x00
-    int 0x10
-    mov ax, 0x0E20
-    mov bh, 0x00
-    int 0x10
-    mov ax, 0x0E08
-    mov bh, 0x00
-    int 0x10
-    mov byte [si], 0x00
+    mov al, 0x00
     dec si
+    dec word [cursorX]
+    call printChar
+    dec word [cursorX]
     ret
 
 loopCheckKey:

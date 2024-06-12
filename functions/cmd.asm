@@ -127,10 +127,7 @@ install:
     ret
 
 printDiskDL:
-    mov ax, 0x0E0D
-    int 0x10
-    mov ax, 0x0E0A
-    int 0x10
+    call newLine
     mov si, 0x3FFE
     mov dl, [si]
     call printdl
@@ -150,7 +147,7 @@ failCmd:
     call nextDOSLine
     ret
 
-invalidCmd db 13, 10, "Invalid command!", 0
+invalidCmd db 10, "Invalid command!", 0
 
 installCmd db "install", 0x0D
 cd_ACmd db "cd a:", 0x0D
