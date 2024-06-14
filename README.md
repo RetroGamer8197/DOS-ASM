@@ -45,20 +45,26 @@ As of v0.2.1, the OS has support for a custom file system which uses the first 2
 
 **MEMORY MAP:**
 
-`0x0000-0x3FFD` - Unused (as of v0.2.2)
+`0x00000-0x03FFD` - Unused (as of v0.3)
 
-`0x3FFE-0x3FFF` - Stores the boot disk information
+`0x03FFE-0x03FFF` - Stores the boot disk information
 
-`0x4000-0x41FF` - Stores the currently typed command(s)
+`0x04000-0x041FF` - Stores the currently typed command(s)
 
-`0x4200-0x4A00` - Stores the file system information of the current working disk
+`0x04200-0x04A00` - Stores the file system information of the current working disk
 
-`0x4A00-0x7BFF` - Unused (as of v0.2.2)
+`0x04A00-0x07BFF` - Unused (as of v0.3)
 
-`0x7C00-0x7DFF` - Stores the bootloader
+`0x07C00-0x07DFF` - Stores the bootloader
 
-`0x7E00-0x8DFF` - Stores the kernel
+`0x07E00-0x08DFF` - Stores the kernel
 
-`0x8E00-0xF1FF` - Unused (as of v0.2.2)
+`0x08E00-0x0F1FF` - Unused (as of v0.3)
 
-`0xF200-0xFA00` - Stores the boot disk file system information
+`0x0F200-0x0F9FF` - Stores the boot disk file system information
+
+`0x0FA00-0x9FFFF` - Unused (as of v0.3)
+
+`0xA0000-0xBFFFF` - VGA Video Buffer
+
+`0xC0000-0xFFFFF` - Unused (as of v0.3)
