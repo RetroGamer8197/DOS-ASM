@@ -45,9 +45,7 @@ As of v0.2.1, the OS has support for a custom file system which uses the first 2
 
 **MEMORY MAP:**
 
-`0x00000-0x00FFF` - Allocated to the stack
-
-`0x01000-0x03FFD` - Unused (as of v0.3)
+`0x00000-0x03FFD` - Unused (as of v0.3)
 
 `0x03FFE-0x03FFF` - Stores the boot disk information
 
