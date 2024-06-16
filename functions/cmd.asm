@@ -1,4 +1,6 @@
 enterPressed:
+    mov dx, si
+
     mov si, 0x3FFD
     mov byte [si], 0x01
 
@@ -57,6 +59,15 @@ enterPressed:
     call cmpStr
     cmp al, 0x00
     je printVer
+
+    mov si, dx
+    mov byte [si], 0x00
+
+    mov si, 0x4200
+    mov di, 0x4000
+    call searchForFile
+    cmp ax, 0xFFFF
+    jne handleExecutable
 
     mov si, 0x3FFD
     cmp byte [si], 0x00
@@ -146,6 +157,27 @@ failCmd:
     call printText
     call nextDOSLine
     ret
+
+handleExecutable:
+    and ax, 0xFFF0
+    mov bx, 0x0000
+    mov es, bx
+    mov bx, 0x1000
+    call loadFile
+    mov si, 0x1000
+    cmp byte [si], 0xEB
+    jne notAValidApplication
+    call 0x1000
+    call clear
+    ret
+
+notAValidApplication:
+    mov si, invalidApplication
+    call printText
+    call nextDOSLine
+    ret
+
+invalidApplication db 10, "Not a valid DOS-ASM application!", 0
 
 invalidCmd db 10, "Invalid command!", 0
 
