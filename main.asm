@@ -17,7 +17,7 @@ hang:
 return:
     ret
 
-VersionName db 10, "DOS-ASM v0.3", 0
+VersionName db 10, "DOS-ASM v0.4", 0
 
 %include "functions/cmd.asm"
 %include "functions/disk.asm"
@@ -26,7 +26,7 @@ VersionName db 10, "DOS-ASM v0.3", 0
 %include "functions/string.asm"
 
 continueText db "Second sector loaded ...", 10, 0
-clearMsg db "DOS-ASM v0.3", 13, 10, 0
+clearMsg db "DOS-ASM v0.4", 13, 10, 0
 installText db 10, "The OS was just installed", 0
 
 outputByte db 0, 0
