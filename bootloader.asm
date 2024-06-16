@@ -2,6 +2,7 @@
 xor ax, ax
 mov ds, ax
 cld
+mov sp, 0x1000
 
 mov si, 0x3FFE
 mov [si], dx

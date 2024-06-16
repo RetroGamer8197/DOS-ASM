@@ -31,6 +31,8 @@ checkFile:
     mov ch, [si]
     cmp ch, cl
     jne endFile
+    cmp cl, 0x00
+    je endFile
     inc si
     inc di
     jmp checkFile
@@ -41,6 +43,7 @@ endFile:
     jmp nextFile
 
 nextFile:
+    and ax, 0xFFF0
     add ax, 0x0010
     and bx, 0xFFF0
     cmp ax, 0x4A00

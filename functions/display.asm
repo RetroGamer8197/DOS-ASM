@@ -23,7 +23,7 @@ printC:
     ret
 
 initDisplay:
-    mov ax, 0x0002
+    mov ax, 0x0003
     int 0x10
     mov word [cursorX], 0
     mov word [cursorY], 0
@@ -128,21 +128,37 @@ moveCursor:
     ret
 
 printdl:
+    push si
+    push di
+
     mov si, outputByte
     mov bl, dl
+    mov bh, 0
     shr bl, 0x04
-    add bl, "0"
+    mov di, hexstr
+    mov ax, di
+    add ax, bx
+    mov di, ax
+    mov bl, [di]
     mov [si], bl
     inc si
     mov bl, dl
     shl bl, 0x04
     shr bl, 0x04
-    add bl, "0"
+    mov di, hexstr
+    mov ax, di
+    add ax, bx
+    mov di, ax
+    mov bl, [di]
     mov [si], bl
     
     mov si, outputByte
     cld
     call printText
+
+    pop di
+    pop si
+
     ret
 
 scroll:
@@ -163,3 +179,5 @@ scrollChar:
     pop di
     pop si
     ret
+
+hexstr db "0123456789ABCDEF"
